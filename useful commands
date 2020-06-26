@@ -1,0 +1,18 @@
+!TACACS+
+!
+aaa new-model
+aaa authentication login authen_via_tacacs group tacacs+ local
+aaa authorization exec authori_via_tacacs group tacacs+ local
+!
+tacacs server FAKE_ISE
+ address ipv4 192.168.0.2
+ key gns3
+!
+!NEW MODEL
+!
+tacacs-server host 192.168.0.2 key gns3
+!
+line vty 0 4
+ authorization exec authori_via_tacacs
+ login authentication authen_via_tacacs
+!
